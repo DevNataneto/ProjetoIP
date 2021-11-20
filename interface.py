@@ -20,7 +20,7 @@ while True:
             sys.exit()
     
     #elementos_da_tela
-    tela.fill(pygame.Color('yellow'))
+    tela.fill(pygame.Color('lightblue'))
 
 
     #atualiza_tela
