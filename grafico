@@ -1,3 +1,0 @@
- import os,sys
- import Image
- jpgfile = Image.open("jogador.jpg")
