@@ -10,7 +10,7 @@ pygame.display.set_caption('Space Invaders')
 
 #elementos_add_da_tela
 fundo = pygame.image.load("imagens\espaço.png")
-fundo_ajustado = pygame.transform.scale(fundo, (tela_largura,tela_altura))
+fundo_ok = pygame.transform.scale(fundo, (tela_largura,tela_altura))
 
 
 #inicio_jogo
@@ -26,7 +26,7 @@ while True:
 
     #elementos_na_tela
     tela.fill(pygame.Color('lightblue'))
-    tela.blit(fundo_ajustado, (0,0))
+    tela.blit(fundo_ok, (0,0))
 
 
     #atualiza_tela
