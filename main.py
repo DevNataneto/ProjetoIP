@@ -1,4 +1,4 @@
-import pygame
+import pygame,sys
 from pygame.time import Clock
 
 #elementos_da_tela
