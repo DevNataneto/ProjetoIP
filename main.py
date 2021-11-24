@@ -30,8 +30,8 @@ class Jogador(pygame.sprite.Sprite):
         #limita_jogador    
         if self.rect.top <= 0:
            self.rect.top = 0
-        if self.rect.bottom >= (tela_altura - 10):
-            self.rect.bottom = (tela_altura - 10)
+        if self.rect.bottom >= (tela_altura - 30):
+            self.rect.bottom = (tela_altura - 30)
         if self.rect.left <= 0:
             self.rect.left = 0
         if self.rect.right >= tela_largura:
