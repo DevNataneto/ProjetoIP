@@ -3,7 +3,7 @@ from pygame.time import Clock
 
 #elementos_da_tela
 tela_altura = 600
-tela_largura = 1200 
+tela_largura = 600 
 tela = pygame.display.set_mode((tela_largura,tela_altura))
 fps = pygame.time.Clock()
 pygame.display.set_caption('Space Invaders')
