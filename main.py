@@ -1,26 +1,32 @@
 import pygame,sys
 from pygame.time import Clock
 
-#elementos_da_tela
-tela_altura = 600
+#elementos_base_da_tela
 tela_largura = 1200
+tela_altura = 700
 tela = pygame.display.set_mode((tela_largura,tela_altura))
 fps = pygame.time.Clock()
 pygame.display.set_caption('Space Invaders')
+
+#elementos_add_da_tela
+fundo = pygame.image.load("imagens\espaço.png")
+fundo_ajustado = pygame.transform.scale(fundo, (tela_largura,tela_altura))
+
 
 #inicio_jogo
 pygame.init
 #jogo_rodando
 while True:
-    #pega_eventos_do_jogo
-    for evento in pygame.event.get():
-    #Quit_game  
+    #analisa_eventos
+    for evento in pygame.event.get():  
         if evento.type == pygame.QUIT:
-            pygame.quit()
+            pygame.quit()            
             sys.exit()
-    
-    #elementos_da_tela
+
+
+    #elementos_na_tela
     tela.fill(pygame.Color('lightblue'))
+    tela.blit(fundo_ajustado, (0,0))
 
 
     #atualiza_tela
