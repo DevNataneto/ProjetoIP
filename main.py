@@ -3,6 +3,7 @@ from pygame.time import Clock
 
 #codigos_jogador
 class Jogador(pygame.sprite.Sprite):
+    
     #cria_jogador
     def __init__(self, x , y):
         pygame.sprite.Sprite.__init__(self)
@@ -16,15 +17,10 @@ class Jogador(pygame.sprite.Sprite):
         velocidade = 1
         aperta = pygame.key.get_pressed()
         #movimentos_jogador
-        if aperta[pygame.K_RIGHT]:
+        if aperta[pygame.K_RIGHT] and self.rect.right < tela_largura- 30:
             self.rect.x += velocidade
-        if aperta[pygame.K_LEFT]:
+        if aperta[pygame.K_LEFT] and self.rect.left > 30:
             self.rect.x -= velocidade
-        #limita_jogador    
-        if self.rect.left <= 30:
-            self.rect.left = 30
-        if self.rect.right >= tela_largura - 30:
-            self.rect.right = tela_largura - 30
 
 #vida_jogador
 class Vidinhas(pygame.sprite.Sprite):
@@ -45,21 +41,17 @@ class Vidinhas(pygame.sprite.Sprite):
         velocidade = 1
         aperta = pygame.key.get_pressed()
         #movimentos_vidas
-        if aperta[pygame.K_RIGHT]:
+        if aperta[pygame.K_RIGHT] and self.rect.right < tela_largura + 15:
             self.rect.x += velocidade
-        if aperta[pygame.K_LEFT]:
+        if aperta[pygame.K_LEFT] and self.rect.left > 0:
             self.rect.x -= velocidade
-        #limita_vida  
-        if self.rect.left <= 0:
-            self.rect.left = 0
-        if self.rect.right >= tela_largura + 15:
-            self.rect.right = tela_largura + 15
+        
 
-class Tiros(pygame.sprite.Sprite):
+class Tirinhos(pygame.sprite.Sprite):
     #cria_tiros
     def __init__(self, x , y):
         pygame.sprite.Sprite.__init__(self)
-        self.image_small = pygame.image.load("imagens\coracoes_0.png")
+        self.image_small = pygame.image.load("imagens\Tiro_.png")
         self.image = pygame.transform.scale(self.image_small, (65,65))
         self.rect = self.image.get_rect()
         self.rect.center = [x, y]
@@ -79,9 +71,10 @@ grupo_jogador= pygame.sprite.Group()
 #elementos_add_da_tela
 jogador = Jogador(int(tela_largura / 2), tela_altura - 80)
 vidas = Vidinhas(int(tela_largura / 2 + 6), tela_altura - 30, 3)
+#tiros = 
 grupo_jogador.add(jogador)
 grupo_jogador.add(vidas)
-
+#grupo_jogador.add(tiros)
 
 #inicio_jogo
 pygame.init
