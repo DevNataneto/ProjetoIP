@@ -20,15 +20,7 @@ class Jogador(pygame.sprite.Sprite):
             self.rect.x += velocidade
         if aperta[pygame.K_LEFT]:
             self.rect.x -= velocidade
-        if aperta[pygame.K_UP]:
-            self.rect.y -= velocidade
-        if aperta[pygame.K_DOWN]:
-            self.rect.y += velocidade
         #limita_jogador    
-        if self.rect.top <= 0:
-           self.rect.top = 0
-        if self.rect.bottom >= (tela_altura - 35):
-            self.rect.bottom = (tela_altura - 35)
         if self.rect.left <= 30:
             self.rect.left = 30
         if self.rect.right >= tela_largura - 30:
@@ -57,15 +49,7 @@ class Vidinhas(pygame.sprite.Sprite):
             self.rect.x += velocidade
         if aperta[pygame.K_LEFT]:
             self.rect.x -= velocidade
-        if aperta[pygame.K_UP]:
-            self.rect.y -= velocidade
-        if aperta[pygame.K_DOWN]:
-            self.rect.y += velocidade
         #limita_vida  
-        if self.rect.top <= 65:
-           self.rect.top = 65
-        if self.rect.bottom >= (tela_altura - 5):
-            self.rect.bottom = (tela_altura - 5)
         if self.rect.left <= 0:
             self.rect.left = 0
         if self.rect.right >= tela_largura + 15:
@@ -93,8 +77,8 @@ fundo = pygame.transform.scale(fundo_small, (tela_largura,tela_altura))
 grupo_jogador= pygame.sprite.Group()
 
 #elementos_add_da_tela
-jogador = Jogador(int(tela_largura / 2), tela_altura - 100)
-vidas = Vidinhas(int(tela_largura / 2 + 6), tela_altura - 50, 3)
+jogador = Jogador(int(tela_largura / 2), tela_altura - 80)
+vidas = Vidinhas(int(tela_largura / 2 + 6), tela_altura - 30, 3)
 grupo_jogador.add(jogador)
 grupo_jogador.add(vidas)
 
