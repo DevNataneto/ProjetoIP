@@ -15,8 +15,6 @@ def desenha():
     morre_inimigo_vermelho()
     morre_inimigo_amarelo()
     
-    
-
 #inicia_jogo
 pygame.init
 while True:
