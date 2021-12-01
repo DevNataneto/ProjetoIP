@@ -26,7 +26,7 @@ def jogador_tiro():
         tela.blit(tiro_jogador,i)
 
 def jogador_movimento():
-    tiro_rect.y -=3
+    tiro_rect.y -=4
     aperta = pygame.key.get_pressed()
     if aperta[pygame.K_LEFT]:
         jogador_rect.move_ip(-2, 0)

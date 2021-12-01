@@ -204,6 +204,7 @@ def morre_inimigo_amarelo():
         tela.blit(inimigo_amarelo,i)
     if tiro_rect.colliderect(inimigo_amarelo1_rect):
         inimigo_amarelo1.clear()
+        tiro_lista.clear()
     for i in inimigo_amarelo2:
         tela.blit(inimigo_amarelo,i)
     if tiro_rect.colliderect(inimigo_amarelo2_rect):
