@@ -1,20 +1,19 @@
 import pygame
 from elementos_base import *
 
-
-#cria tiros
-png_tiro = pygame.image.load("imagens\Teste.png")
-tiro_jogador = pygame.transform.scale(png_tiro, (15, 26)) 
-tiro_rect = tiro_jogador.get_rect()
+#cria jogador
+jogador_rect.center = tela_largura / 2, tela_altura - 70
+jogador_lista = [jogador_rect]
 
 #cria vidinhas
 vida = 3
 png_vidas = pygame.image.load("imagens\coracoes_3.png")
 vidas = pygame.transform.scale(png_vidas, (140,35))
 
-#posiciona jogador
-jogador_rect.center = tela_largura / 2, tela_altura - 70
-jogador_lista = [jogador_rect]
+#cria tiros
+png_tiro = pygame.image.load("imagens\Teste.png")
+tiro_jogador = pygame.transform.scale(png_tiro, (15, 26)) 
+tiro_rect = tiro_jogador.get_rect()
 tiro_lista = []
 
 def jogador_nave():
@@ -24,16 +23,14 @@ def jogador_nave():
 def jogador_tiro():
     for i in tiro_lista:
         tela.blit(tiro_jogador,i)
-
+#move o jogador
 def jogador_movimento():
-    tiro_rect.y -=4
+    tiro_rect.y -=8
     aperta = pygame.key.get_pressed()
     if aperta[pygame.K_LEFT]:
-        jogador_rect.move_ip(-2, 0)
+        jogador_rect.x -=5
     if aperta[pygame.K_RIGHT]:
-        jogador_rect.move_ip(2, 0)
-    if aperta[pygame.K_UP]:
-        jogador_rect.move_ip(0, -2)
+        jogador_rect.x +=5
     if aperta[pygame.K_SPACE]:
         tiro_lista.append(tiro_rect)
         tiro_rect.center = jogador_rect.centerx, jogador_rect.top + 5
