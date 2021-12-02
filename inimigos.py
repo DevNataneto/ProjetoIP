@@ -22,3 +22,4 @@ for linha in range(linhas):
 def desenha_aliens():
     for i in range (32):
         tela.blit(aliens_lista[i], rects_lista[i])
+        
