@@ -6,7 +6,7 @@ import random
 linhas = 4
 colunas = 8
 aliens_lista = []
-rects_lista = []
+alienrect_lista = []
 
 #cria e posiciona os aliens
 for linha in range(linhas):
@@ -15,11 +15,11 @@ for linha in range(linhas):
         alien = pygame.transform.scale(png_alien, (60,65))
         alien_rect = alien.get_rect()
         aliens_lista.append(alien)
-        rects_lista.append(alien_rect)
+        alienrect_lista.append(alien_rect)
         alien_rect.center = (100 + coluna * 100, linha * 75 + 50)
 
 #desenha os aliens nos seus respectivos rects
 def desenha_aliens():
-    for i in range (32):
-        tela.blit(aliens_lista[i], rects_lista[i])
+    for i in range (len(alienrect_lista)):
+        tela.blit(aliens_lista[i], alienrect_lista[i])
         
