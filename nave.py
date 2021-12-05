@@ -2,8 +2,20 @@ import pygame
 from elementos_base import *
 
 #cria jogador
+png_jogador = pygame.image.load("imagens\jogador_nave.png")
+jogador = pygame.transform.scale(png_jogador, (60,65))
+jogador_rect = jogador.get_rect()
 jogador_rect.center = tela_largura / 2, tela_altura - 70
 jogador_lista = [jogador_rect]
+
+#cria tiro do jogador
+png_tirojogador = pygame.image.load("imagens\Teste.png")
+tirojogador = pygame.transform.scale(png_tirojogador, (10, 20)) 
+tiro_lista = []
+tirorect_lista = []
+cooldown_jogador = 500
+ultimo_tirojogador = 0
+
 #cria vidinhas
 vida = 3
 png_vidas = pygame.image.load("imagens\coracoes_3.png")
@@ -14,14 +26,13 @@ def jogador_nave():
         tela.blit(jogador,i)
 
 #move o jogador
-def jogador_movimento():
-    
+def jogador_movimento(): 
     aperta = pygame.key.get_pressed()
+
     if aperta[pygame.K_LEFT]:
         jogador_rect.x -=4
     if aperta[pygame.K_RIGHT]:
         jogador_rect.x +=4
-
     if jogador_rect.left <= 0:
         jogador_rect.left = 0
     if jogador_rect.right >= tela_largura:
