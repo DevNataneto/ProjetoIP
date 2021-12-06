@@ -10,7 +10,7 @@ jogador_lista = [jogador_rect]
 
 #cria tiro do jogador
 png_tirojogador = pygame.image.load("imagens\Teste.png")
-tirojogador = pygame.transform.scale(png_tirojogador, (10, 20)) 
+tirojogador = pygame.transform.scale(png_tirojogador, (8, 16)) 
 tiro_lista = []
 tirorect_lista = []
 cooldown_jogador = 500
@@ -28,7 +28,6 @@ def jogador_nave():
 #move o jogador
 def jogador_movimento(): 
     aperta = pygame.key.get_pressed()
-
     if aperta[pygame.K_LEFT]:
         jogador_rect.x -=4
     if aperta[pygame.K_RIGHT]:
@@ -37,4 +36,3 @@ def jogador_movimento():
         jogador_rect.left = 0
     if jogador_rect.right >= tela_largura:
         jogador_rect.right = tela_largura
-        

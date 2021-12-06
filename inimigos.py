@@ -16,7 +16,7 @@ for linha in range(linhas):
         alien_rect = alien.get_rect()
         aliens_lista.append(alien)
         alienrect_lista.append(alien_rect)
-        alien_rect.center = (85 + coluna * 90, linha * 70 + 50)
+        alien_rect.center = (85 + coluna * 90, linha * 70 + 60)
 
 #desenha os aliens nos seus respectivos rects
 def desenha_aliens():
@@ -28,7 +28,5 @@ png_tiroalien = pygame.image.load("imagens\Teste.png")
 tiroalien = pygame.transform.scale(png_tirojogador, (6, 12)) 
 tiroalien_lista = []
 tiroalienrect_lista = []
-cooldown_alien = 1000
+cooldown_alien = 800
 ultimo_tiroalien = 0
-
-        
