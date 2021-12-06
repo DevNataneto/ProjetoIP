@@ -1,8 +1,10 @@
 import pygame,sys
+from pygame.constants import MOUSEBUTTONDOWN
 from pygame.time import Clock
 from inimigos import *
 from nave import *
 import random
+from menu import *
 
 
 def desenha_fundo():
@@ -17,79 +19,114 @@ def desenha():
 
 def game_over():
     pass
+#Variáveis do Menu
+
+menu = True
+click = False
+#Botões do Menu
+
+botao_1 = pygame.image.load("imagens/Inimigo1.png")
+botao1_tamanho = pygame.transform.scale(botao_1, (100,100))
+botao1_rect = botao1_tamanho.get_rect()
+botao1_rect.center = (tela_largura/2, tela_altura/2)
 
 #inicia jogo
 pygame.init
-#MENU AQUI :)
 while True:
-    jogador_mask = pygame.mask.from_surface(jogador)
-    contador += 1
-    agora = pygame.time.get_ticks()
-    aperta = pygame.key.get_pressed()   
-    clock.tick(fps)
-    desenha_fundo()
-    
-    #tira vidas
-    if vida == 2:
-        png_vidas = pygame.image.load("imagens\coracoes_2.png")
-    if vida == 1:
-        png_vidas = pygame.image.load("imagens\coracoes_1.png")
-    if vida == 0:
-        png_vidas = pygame.image.load("imagens\coracoes_0.png")
-    vidas = pygame.transform.scale(png_vidas, (140,35))
-    
-    #mexe os aliens
-    for i in range (len(alienrect_lista)):
-        alienrect_lista[i].x += alien_v
-    if contador > 55 :
-        alien_v *= -1
-        contador *= -1
-        for i in range (len(alienrect_lista)): 
-            alienrect_lista[i].move_ip(0,+5)
-    #alien atira
-    if agora - ultimo_tiroalien > cooldown_alien and len(tiroalienrect_lista) < 8 and len(alienrect_lista) > 0:
-        tiroalienrect = tiroalien.get_rect()
-        tiroalienrect_lista.append(tiroalienrect)
-        alien_atacante = random.choice (alienrect_lista)
-        tiroalienrect.center = alien_atacante.centerx, alien_atacante.bottom
-        ultimo_tiroalien = agora
-    #move o tiro
-    for i in tiroalienrect_lista:
-        tela.blit(tiroalien, i)
-        i.y +=4
-        #exclui o tiro
-        if i.top >= tela_altura or i.colliderect(jogador_rect):
-            tiroalienrect_lista.remove(i)
-        if i.colliderect(jogador_rect):
-            vida -= 1
+    if menu == True:
 
-    
-    #jogador atira
-    if aperta[pygame.K_SPACE] and agora - ultimo_tirojogador > cooldown_jogador:
-        tirorect = tirojogador.get_rect()
-        tirorect_lista.append(tirorect)
-        tirorect.center = jogador_rect.centerx, jogador_rect.top
-        ultimo_tirojogador = agora
-    #move o tiro
-    for i in tirorect_lista:
-        tela.blit(tirojogador, i)
-        i.y -=8
-        #exclui o tiro
-        for j in alienrect_lista:
-            if i.colliderect(j):
-                alienrect_lista.remove(j)
-                tirorect_lista.remove(i)
-                pontos += 20
-                break
+        tela.blit(botao1_tamanho, botao1_rect)
 
-    desenha()
-    jogador_movimento()
-    pygame.display.flip()
-    
-    #fecha o jogo
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            pygame.quit()            
-            sys.exit()
+        mx, my = pygame.mouse.get_pos()
+
+        if botao1_rect.collidepoint((mx, my)):
+            if click:
+                menu = False
+
+        pygame.display.flip()
+        clock.tick(fps)
+        click = False
+        #fecha o jogo
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()            
+                sys.exit()
+            if event.type == MOUSEBUTTONDOWN:
+                if event.button == 1:
+                    click = True
+                    print("Clicando")
+        
+    else:
+
+        tela.fill((255,0,0))
+        jogador_mask = pygame.mask.from_surface(jogador)
+        contador += 1
+        agora = pygame.time.get_ticks()
+        aperta = pygame.key.get_pressed()   
+        clock.tick(fps)
+        desenha_fundo()
+        
+        #tira vidas
+        if vida == 2:
+            png_vidas = pygame.image.load("imagens\coracoes_2.png")
+        if vida == 1:
+            png_vidas = pygame.image.load("imagens\coracoes_1.png")
+        if vida == 0:
+            png_vidas = pygame.image.load("imagens\coracoes_0.png")
+        vidas = pygame.transform.scale(png_vidas, (140,35))
+        
+        #mexe os aliens
+        for i in range (len(alienrect_lista)):
+            alienrect_lista[i].x += alien_v
+        if contador > 55 :
+            alien_v *= -1
+            contador *= -1
+            for i in range (len(alienrect_lista)): 
+                alienrect_lista[i].move_ip(0,+5)
+        #alien atira
+        if agora - ultimo_tiroalien > cooldown_alien and len(tiroalienrect_lista) < 8 and len(alienrect_lista) > 0:
+            tiroalienrect = tiroalien.get_rect()
+            tiroalienrect_lista.append(tiroalienrect)
+            alien_atacante = random.choice (alienrect_lista)
+            tiroalienrect.center = alien_atacante.centerx, alien_atacante.bottom
+            ultimo_tiroalien = agora
+        #move o tiro
+        for i in tiroalienrect_lista:
+            tela.blit(tiroalien, i)
+            i.y +=4
+            #exclui o tiro
+            if i.top >= tela_altura or i.colliderect(jogador_rect):
+                tiroalienrect_lista.remove(i)
+            if i.colliderect(jogador_rect):
+                vida -= 1
+
+        
+        #jogador atira
+        if aperta[pygame.K_SPACE] and agora - ultimo_tirojogador > cooldown_jogador:
+            tirorect = tirojogador.get_rect()
+            tirorect_lista.append(tirorect)
+            tirorect.center = jogador_rect.centerx, jogador_rect.top
+            ultimo_tirojogador = agora
+        #move o tiro
+        for i in tirorect_lista:
+            tela.blit(tirojogador, i)
+            i.y -=8
+            #exclui o tiro
+            for j in alienrect_lista:
+                if i.colliderect(j):
+                    alienrect_lista.remove(j)
+                    tirorect_lista.remove(i)
+                    pontos += 20
+                    break
+
+        desenha()
+        jogador_movimento()
+        pygame.display.flip()
+        
+        #fecha o jogo
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()            
+                sys.exit()
 
 pygame.quit()
