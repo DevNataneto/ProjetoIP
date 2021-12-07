@@ -21,7 +21,7 @@ contador = 0
 
 #timer do jogo
 fonte_timer = pygame.font.SysFont("Consantia",60)
-timer = 3
+timer = 4
 ultimo_timer = pygame.time.get_ticks()
 
 #sons do jogo
@@ -40,4 +40,3 @@ selec_menu.set_volume(0.25)
 musica_tema = pygame.mixer.music.load("sons/tema.ogg")
 pygame.mixer.music.play(-1)
 pygame.mixer.music.set_volume(0.10)
-
