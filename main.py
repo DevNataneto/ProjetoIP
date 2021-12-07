@@ -23,6 +23,7 @@ def game_over():
     if vida == 0:
         fimjogo = -1
     return fimjogo
+
 #Variáveis do Menu
 menu = True
 click = False
@@ -33,14 +34,11 @@ som3 = True
 som4 = True
 som5 = True
 
-#botões do menu
-
 #titulo do menu
 titulo_1 = pygame.image.load("imagens/titulo_1.png")
 titulo1_tamanho = pygame.transform.scale(titulo_1, (400,400))
 titulo1_rect = titulo1_tamanho.get_rect()
 titulo1_rect.center = (tela_largura/2, tela_altura/3)
-
 
 #background do menu
 bg_menu = pygame.image.load("imagens/testebg.png")
@@ -59,10 +57,9 @@ botao_2_select = pygame.image.load("imagens/botao_sair2.png")
 botao2_tamanho = pygame.transform.scale(botao_2, (100,100))
 botao2_rect = botao2_tamanho.get_rect()
 botao2_rect.center = (tela_largura/2, tela_altura/1.2)
+
 #inicia jogo
 pygame.init()
-
-
 
 while True:
     if menu == True:
@@ -163,7 +160,8 @@ while True:
             #move o tiro
             for i in tiroalienrect_lista:
                 tela.blit(tiroalien, i)
-                i.y +=4
+                #VELOCIDADE DO TIRO
+                i.y +=10
                 #exclui o tiro
                 if i.top >= tela_altura:
                     tiroalienrect_lista.remove(i)
