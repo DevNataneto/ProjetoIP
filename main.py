@@ -5,6 +5,7 @@ from inimigos import *
 from nave import *
 import random
 from menu import *
+from pygame import mixer
 
 def desenha_fundo():
     ponto_txt = fonte.render(f'Pontos: {pontos}', 1, (255,255,255))
@@ -27,8 +28,16 @@ def game_over():
 menu = True
 click = False
 i = 0
+a = 0
 
 #botões do menu
+
+#titulo do menu
+titulo_1 = pygame.image.load("imagens/titulo_1.png")
+titulo1_tamanho = pygame.transform.scale(titulo_1, (300,300))
+titulo1_rect = titulo1_tamanho.get_rect()
+titulo1_rect.center = (tela_largura/2, tela_altura/3)
+
 
 #background do menu
 bg_menu = pygame.image.load("imagens/testebg.png")
@@ -48,7 +57,10 @@ botao2_tamanho = pygame.transform.scale(botao_2, (100,100))
 botao2_rect = botao2_tamanho.get_rect()
 botao2_rect.center = (tela_largura/2, tela_altura/1.2)
 #inicia jogo
-pygame.init
+pygame.init()
+
+
+
 while True:
     if menu == True:
         #rolagem do background do menu
@@ -58,6 +70,7 @@ while True:
             tela.blit(bg_menu_tamanho, (tela_largura+i, 0))
             i = 0
         i -= 1
+        tela.blit(titulo1_tamanho, titulo1_rect)
         tela.blit(botao1_tamanho, botao1_rect)
         tela.blit(botao2_tamanho, botao2_rect)
         mx, my = pygame.mouse.get_pos()
