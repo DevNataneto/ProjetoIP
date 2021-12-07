@@ -28,13 +28,17 @@ def game_over():
 menu = True
 click = False
 i = 0
-a = 0
+som1 = True
+som2 = True
+som3 = True
+som4 = True
+som5 = True
 
 #botões do menu
 
 #titulo do menu
 titulo_1 = pygame.image.load("imagens/titulo_1.png")
-titulo1_tamanho = pygame.transform.scale(titulo_1, (300,300))
+titulo1_tamanho = pygame.transform.scale(titulo_1, (400,400))
 titulo1_rect = titulo1_tamanho.get_rect()
 titulo1_rect.center = (tela_largura/2, tela_altura/3)
 
@@ -74,19 +78,30 @@ while True:
         tela.blit(botao1_tamanho, botao1_rect)
         tela.blit(botao2_tamanho, botao2_rect)
         mx, my = pygame.mouse.get_pos()
+        #muda o sprite do botão de sair
         if botao2_rect.collidepoint((mx, my)):
             botao2_tamanho = pygame.transform.scale(botao_2_select, (100,100))
+            if som1 == True:
+                menu_selecao.play()
+                som1 = False
         else:
             botao2_tamanho = pygame.transform.scale(botao_2, (100,100))
-        if botao2_rect.collidepoint((mx, my)):
-            pass
+            som1 = True
+        #muda o sprite do botão de start
         if botao1_rect.collidepoint((mx, my)):
             botao1_tamanho = pygame.transform.scale(botao_1_select, (100,100))
+            if som2 == True:
+                menu_selecao.play()
+                som2 = False 
         else:
             botao1_tamanho = pygame.transform.scale(botao_1, (100,100))
+            som2 = True
+        #leva para o jogo ao clicar em jogar
         if botao1_rect.collidepoint((mx, my)):
             if click:
                 menu = False
+
+        #sai do jogo ao clicar que sair
         if botao2_rect.collidepoint((mx, my)):
             if click:
                 pygame.quit()            
@@ -104,6 +119,7 @@ while True:
                     click = True
                     print("Clicando")
     else:
+        pygame.mixer.music.stop()
         aperta = pygame.key.get_pressed()   
         clock.tick(fps)
         desenha_fundo()
@@ -117,7 +133,15 @@ while True:
             if timer_tempo - ultimo_timer > 1000:
                 timer -= 1
                 ultimo_timer = timer_tempo
-
+            if timer == 3 and som3 == True:
+                selec_menu.play()
+                som3 = False
+            if timer == 2 and som4 == True:
+                selec_menu.play()
+                som4 = False
+            if timer == 1 and som5 == True:
+                selec_menu.play()
+                som5 = False
         if timer == 0 and game_over() == 0 and vida > 0:
             contador += 1
             agora = pygame.time.get_ticks()
