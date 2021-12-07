@@ -161,10 +161,11 @@ while True:
             for i in tiroalienrect_lista:
                 tela.blit(tiroalien, i)
                 #VELOCIDADE DO TIRO
-                i.y +=10
+                i.y +=4
                 #exclui o tiro
                 if i.top >= tela_altura:
                     tiroalienrect_lista.remove(i)
+                    
                 if i.colliderect(jogador_rect):
                     vida -= 1
                     explosao2_som.play()
@@ -182,10 +183,11 @@ while True:
                 tela.blit(tirojogador, i)
                 i.y -=8
                 #exclui o tiro
-                for j in alienrect_lista:
-                    if i.colliderect(j):
+                for j in range (len(alienrect_lista)):
+                    if i.colliderect(alienrect_lista[j]):
                         explosao_som.play()
-                        alienrect_lista.remove(j)
+                        alienrect_lista.pop(j)
+                        aliens_lista.pop(j)
                         tirorect_lista.remove(i)
                         pontos += 20
                         break
