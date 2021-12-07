@@ -145,7 +145,7 @@ while True:
         #mexe os aliens
             for i in range (len(alienrect_lista)):
                 alienrect_lista[i].x += alien_v
-            if contador > 55 :
+            if contador > 55-(level*10):
                 alien_v *= -1
                 contador *= -1
                 for i in range (len(alienrect_lista)): 
@@ -161,7 +161,7 @@ while True:
             for i in tiroalienrect_lista:
                 tela.blit(tiroalien, i)
                 #VELOCIDADE DO TIRO
-                i.y +=4
+                i.y +=level
                 #exclui o tiro
                 if i.top >= tela_altura:
                     tiroalienrect_lista.remove(i)

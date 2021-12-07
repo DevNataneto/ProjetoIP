@@ -16,8 +16,9 @@ fps = 60
 pygame.font.init()
 fonte = pygame.font.SysFont("bahnschrift",30)
 pontos = 0
-alien_v = 1
 contador = 0
+level = 5
+alien_v = level
 
 #timer do jogo
 fonte_timer = pygame.font.SysFont("Consantia",60)

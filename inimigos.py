@@ -3,7 +3,7 @@ from elementos_base import *
 from nave import *
 import random
 
-linhas = 5
+linhas = level
 colunas = 8
 aliens_lista = []
 alienrect_lista = []
