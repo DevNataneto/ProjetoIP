@@ -137,6 +137,7 @@ while True:
             if timer == 1 and som5 == True:
                 selec_menu.play()
                 som5 = False
+        #inicio do jogo
         if timer == 0 and game_over() == 0 and vida > 0:
             contador += 1
             agora = pygame.time.get_ticks()
@@ -145,7 +146,7 @@ while True:
         #mexe os aliens
             for i in range (len(alienrect_lista)):
                 alienrect_lista[i].x += alien_v
-            if contador > 55-(level*10):
+            if contador > 55-(level):
                 alien_v *= -1
                 contador *= -1
                 for i in range (len(alienrect_lista)): 
