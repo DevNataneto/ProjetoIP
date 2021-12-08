@@ -28,5 +28,5 @@ png_tiroalien = pygame.image.load("imagens\Teste.png")
 tiroalien = pygame.transform.scale(png_tirojogador, (6, 12)) 
 tiroalien_lista = []
 tiroalienrect_lista = []
-cooldown_alien = 800
+cooldown_alien = 800 - (50 * level)
 ultimo_tiroalien = 0

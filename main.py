@@ -13,13 +13,13 @@ def desenha_fundo():
     tela.blit(ponto_txt, (20, tela_altura - 45))
 
 def desenha():
-    jogador_nave()
+    desenha_nave()
     desenha_aliens()
 
 def game_over():
     fimjogo = 0
     if len(alienrect_lista) == 0:
-        fimjogo = 1
+        fimjogo += 1
     if vida == 0:
         fimjogo = -1
     return fimjogo
@@ -60,7 +60,6 @@ botao2_rect.center = (tela_largura/2, tela_altura/1.2)
 
 #inicia jogo
 pygame.init()
-
 while True:
     if menu == True:
         #rolagem do background do menu
@@ -118,12 +117,13 @@ while True:
         aperta = pygame.key.get_pressed()   
         clock.tick(fps)
         desenha_fundo()
+        
         #timer
         if timer > 0:
-            timer_txt = fonte_timer.render('Se prepare!', 1, (255,255,255))
-            timer_numero = fonte_timer.render(f'{timer}', 1, (255,255,255))
-            tela.blit(timer_txt, (tela_largura / 2 -  120, tela_altura / 2))
-            tela.blit(timer_numero, (tela_largura / 2 -  10, tela_altura / 2 + 50))
+            timer_txt = fonte.render('Prepare-se!', 1, (255,255,255))
+            timer_numero = fonte.render(f'{timer}', 1, (255,255,255))
+            tela.blit(timer_txt, (tela_largura / 2 -  115, tela_altura - 240))
+            tela.blit(timer_numero, (tela_largura / 2 -  12, tela_altura - 190))
             timer_tempo = pygame.time.get_ticks()
             if timer_tempo - ultimo_timer > 1000:
                 timer -= 1
@@ -146,13 +146,13 @@ while True:
         #mexe os aliens
             for i in range (len(alienrect_lista)):
                 alienrect_lista[i].x += alien_v
-            if contador > 55-(level):
+            if contador > 55:
                 alien_v *= -1
                 contador *= -1
                 for i in range (len(alienrect_lista)): 
                     alienrect_lista[i].move_ip(0,+5)
             #alien atira
-            if agora - ultimo_tiroalien > cooldown_alien and len(tiroalienrect_lista) < 8 and len(alienrect_lista) > 0:
+            if agora - ultimo_tiroalien > cooldown_alien and len(tiroalienrect_lista) < 7 + level and len(alienrect_lista) > 0:
                 tiroalienrect = tiroalien.get_rect()
                 tiroalienrect_lista.append(tiroalienrect)
                 alien_atacante = random.choice (alienrect_lista)
@@ -161,17 +161,23 @@ while True:
             #move o tiro
             for i in tiroalienrect_lista:
                 tela.blit(tiroalien, i)
-                #VELOCIDADE DO TIRO
-                i.y +=level
+                i.y += 1 + level 
                 #exclui o tiro
                 if i.top >= tela_altura:
                     tiroalienrect_lista.remove(i)
-                    
                 if i.colliderect(jogador_rect):
                     vida -= 1
                     explosao2_som.play()
                     tiroalienrect_lista.remove(i)
-                    
+                    #jogador fica branco quando toma dano
+                    png_jogadordano = pygame.image.load("imagens\jogador_nave_dano.png")
+                    jogadordano = pygame.transform.scale(png_jogadordano, (60, 65))
+                    jogador_lista[0] = jogadordano
+                    conta = 0
+            conta += 1
+            if conta > 6:
+                jogador_lista[0] =jogador
+                        
             #jogador atira
             if aperta[pygame.K_SPACE] and agora - ultimo_tirojogador > cooldown_jogador:
                 tirorect = tirojogador.get_rect()
@@ -192,7 +198,8 @@ while True:
                         tirorect_lista.remove(i)
                         pontos += 20
                         break
-        #tira vidas
+
+        #muda as vidas
         if vida == 2:
             png_vidas = pygame.image.load("imagens\coracoes_2.png")
         if vida == 1:
@@ -204,11 +211,14 @@ while True:
         desenha()
         game_over()
         if game_over() == 1:
-            ganhou_txt = fonte_timer.render('Você ganhou!', 1, (255,255,255))
-            tela.blit(ganhou_txt, (tela_largura / 2 -  140, tela_altura / 2 - 20))
+            ganhou_txt = fonte_win.render('Parabéns você ganhou!', 1, (255,255,255))
+            ganhou_txt2 = fonte_win.render(f'Sua pontuação total foi de {pontos} pontos', 1, (255,255,255))
+            tela.blit(ganhou_txt, (150, tela_altura / 2 ))
+            tela.blit(ganhou_txt2, (20, tela_altura / 2 + 50 ))
         if game_over() == -1:
-            perdeu_txt = fonte_timer.render('Você perdeu!', 1, (255,255,255))
-            tela.blit(perdeu_txt, (tela_largura / 2 -  140, tela_altura / 2 + 50))
+            perdeu_txt = fonte.render('Você perdeu!', 1, (255,255,255))
+            tela.blit(perdeu_txt, (280, tela_altura - 140))
+            jogadorrect_lista.clear()          
 
         pygame.display.flip()
         #fecha o jogo

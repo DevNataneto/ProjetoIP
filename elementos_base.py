@@ -14,14 +14,16 @@ fundo = pygame.transform.scale(png_fundo, (tela_largura,tela_altura))
 clock = pygame.time.Clock()
 fps = 60
 pygame.font.init()
-fonte = pygame.font.SysFont("bahnschrift",30)
+fonte = pygame.font.SysFont("bahnschrift",40)
+fonte2 = pygame.font.SysFont("bahnschrift",30)
 pontos = 0
 contador = 0
+conta = 0
+alien_v = 1
 level = 5
-alien_v = level
 
 #timer do jogo
-fonte_timer = pygame.font.SysFont("Consantia",60)
+fonte_win = pygame.font.SysFont("Consantia",60)
 timer = 4
 ultimo_timer = pygame.time.get_ticks()
 
