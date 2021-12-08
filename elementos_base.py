@@ -20,7 +20,7 @@ pontos = 0
 contador = 0
 conta = 0
 alien_v = 1
-level = 5
+level = 1
 
 #timer do jogo
 fonte_win = pygame.font.SysFont("Consantia",60)

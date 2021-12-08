@@ -177,7 +177,7 @@ while True:
             conta += 1
             if conta > 6:
                 jogador_lista[0] =jogador
-                        
+
             #jogador atira
             if aperta[pygame.K_SPACE] and agora - ultimo_tirojogador > cooldown_jogador:
                 tirorect = tirojogador.get_rect()
@@ -210,16 +210,88 @@ while True:
 
         desenha()
         game_over()
-        if game_over() == 1:
+        if game_over() == 1 and level == 1:
             ganhou_txt = fonte_win.render('Parabéns você ganhou!', 1, (255,255,255))
             ganhou_txt2 = fonte_win.render(f'Sua pontuação total foi de {pontos} pontos', 1, (255,255,255))
             tela.blit(ganhou_txt, (150, tela_altura / 2 ))
-            tela.blit(ganhou_txt2, (20, tela_altura / 2 + 50 ))
+            tela.blit(ganhou_txt2, (10, tela_altura / 2 + 50 ))   
+        if game_over() == 1 and level != 1:
+            ganhou_txt = fonte2.render('Você Sobreviveu!', 1, (255,255,255))
+            ganhou_txt2 = fonte2.render('Aperte enter para continuar', 1, (255,255,255))
+            tela.blit(ganhou_txt, (260, tela_altura / 2 ))
+            tela.blit(ganhou_txt2, (220, tela_altura / 2 + 50 ))
         if game_over() == -1:
-            perdeu_txt = fonte.render('Você perdeu!', 1, (255,255,255))
-            tela.blit(perdeu_txt, (280, tela_altura - 140))
-            jogadorrect_lista.clear()          
+            perdeu_txt = fonte2.render('Você perdeu, aperte enter para tentar novamente', 1, (255,255,255))
+            tela.blit(perdeu_txt, (80, tela_altura - 140))
+            jogador_lista.clear()
+            
+        #Reinicia o level
+        if aperta[pygame.K_RETURN] and vida == 0:
+            aliens_lista.clear()
+            alienrect_lista.clear()
+            contador = 0
+            conta = 0
+            pontos = 0
+            vida = 3
+            if vida == 3:
+                png_vidas = pygame.image.load("imagens\coracoes_3.png")
+            vidas = pygame.transform.scale(png_vidas, (140,35))
+            tiro_lista.clear()
+            tirorect_lista.clear()
+            cooldown_jogador = 500
+            ultimo_tirojogador = 0
+            jogador_lista.append(jogador)
+            jogador_rect.center = tela_largura / 2, tela_altura - 70
+            linhas = level
+            colunas = 8
+            aliens_lista.clear()
+            alienrect_lista.clear()
+            tiroalien_lista.clear()
+            tiroalienrect_lista.clear()
+            for linha in range(linhas):
+                for coluna in range(colunas):
+                    png_alien = pygame.image.load("imagens\Inimigo" + str(random.randint(1,4)) + ".png")
+                    alien = pygame.transform.scale(png_alien, (60,65))
+                    alien_rect = alien.get_rect()
+                    aliens_lista.append(alien)
+                    alienrect_lista.append(alien_rect)
+                    alien_rect.center = (85 + coluna * 90, linha * 70 + 60)
 
+
+        #Passa de fase
+        if aperta[pygame.K_RETURN] and len(alienrect_lista) == 0 and level < 1:
+            level += 1
+            contador = 0
+            conta = 0
+            vida = 3
+            if vida == 3:
+                png_vidas = pygame.image.load("imagens\coracoes_3.png")
+            vidas = pygame.transform.scale(png_vidas, (140,35))
+            tiro_lista = []
+            tirorect_lista = []
+            cooldown_jogador = 500
+            ultimo_tirojogador = 0
+            jogador_rect.center = tela_largura / 2, tela_altura - 70
+            linhas = level
+            colunas = 8
+            aliens_lista = []
+            alienrect_lista = []
+            tiroalien_lista = []
+            tiroalienrect_lista = []
+            for linha in range(linhas):
+                for coluna in range(colunas):
+                    png_alien = pygame.image.load("imagens\Inimigo" + str(random.randint(1,4)) + ".png")
+                    alien = pygame.transform.scale(png_alien, (60,65))
+                    alien_rect = alien.get_rect()
+                    aliens_lista.append(alien)
+                    alienrect_lista.append(alien_rect)
+                    alien_rect.center = (85 + coluna * 90, linha * 70 + 60)
+
+
+            #desenha os aliens nos seus respectivos rects
+            def desenha_aliens():
+                for i in range (len(alienrect_lista)):
+                    tela.blit(aliens_lista[i], alienrect_lista[i])
         pygame.display.flip()
         #fecha o jogo
         for event in pygame.event.get():
