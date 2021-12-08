@@ -210,12 +210,12 @@ while True:
 
         desenha()
         game_over()
-        if game_over() == 1 and level == 1:
+        if game_over() == 1 and level == 7:
             ganhou_txt = fonte_win.render('Parabéns você ganhou!', 1, (255,255,255))
             ganhou_txt2 = fonte_win.render(f'Sua pontuação total foi de {pontos} pontos', 1, (255,255,255))
             tela.blit(ganhou_txt, (150, tela_altura / 2 ))
             tela.blit(ganhou_txt2, (10, tela_altura / 2 + 50 ))   
-        if game_over() == 1 and level != 1:
+        if game_over() == 1 and level != 7:
             ganhou_txt = fonte2.render('Você Sobreviveu!', 1, (255,255,255))
             ganhou_txt2 = fonte2.render('Aperte enter para continuar', 1, (255,255,255))
             tela.blit(ganhou_txt, (260, tela_altura / 2 ))
@@ -257,9 +257,8 @@ while True:
                     alienrect_lista.append(alien_rect)
                     alien_rect.center = (85 + coluna * 90, linha * 70 + 60)
 
-
         #Passa de fase
-        if aperta[pygame.K_RETURN] and len(alienrect_lista) == 0 and level < 1:
+        if aperta[pygame.K_RETURN] and len(alienrect_lista) == 0 and level < 7:
             level += 1
             contador = 0
             conta = 0
